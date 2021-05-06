@@ -73,6 +73,7 @@ const routes = [
 ]
 
 const router = createRouter({
+  base: '/bai-an-ji',
   history: createWebHashHistory(),
   routes
 })
