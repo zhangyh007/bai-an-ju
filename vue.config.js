@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: './bai-an-ju',
+  publicPath: './',
   devServer: {
     host: '0.0.0.0',
     port: 9000,
