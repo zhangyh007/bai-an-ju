@@ -42,6 +42,6 @@ jobs:
         with:
           publish_dir: ./dist # 部署打包后的 dist 目录
           github_token: ${{ secrets.BAI_AN_JU }} # secret 名
-          user_name: ${{ secrets.zhangyh007 }}
-          user_email: ${{ secrets.879295567@qq.com }}
+          user_name: ${{ secrets.MY_USER_NAME }}
+          user_email: ${{ secrets.MY_USER_EMAIL }}
           commit_message: build and restart # 部署时的 git 提交信息，自由填写
