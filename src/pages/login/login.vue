@@ -1,8 +1,8 @@
 <template>
   <div class="login">
-    <header class="header">商户认证</header>
     <div class="content">
-      <van-form @submit="onSubmit">
+      <header class="header">商户认证</header>
+      <van-form class="form" @submit="onSubmit">
         <van-field
           v-model="state.username"
           name="username"
@@ -17,6 +17,7 @@
           name="phone"
           label="手机号"
           placeholder="请输入手机号码"
+          style="margin-bottom: 10px;"
           maxlength="11"
           :rules="[{ required: true, message: '请输入手机号码' }]"
         />
@@ -75,6 +76,8 @@ export default {
 .login {
   min-height: 100%;
   background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
 }
 .header {
   font-size: 36px;
@@ -86,14 +89,14 @@ export default {
 }
 .content {
   padding: 0 10%;
+  flex-shrink: 0;
+  min-height: 100%;
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
   padding: 0 10%;
   padding-bottom: 20px;
+  padding-top: calc(100vh - 400px);
 }
 </style>

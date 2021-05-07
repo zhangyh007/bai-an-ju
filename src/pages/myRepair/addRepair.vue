@@ -72,6 +72,7 @@
         :rules="[{ required: true, message: '请输入报修内容' }]"
         rows="1"
         autosize
+        style="margin-bottom: 10px"
       />
       <footer class="footer">
         <van-button
@@ -137,26 +138,27 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-.form {
-  background-color: #ffffff;
-}
-</style>
+
 <style lang="scss" scoped>
 .new-repair {
   min-height: 100%;
   padding-top: 20px;
   background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
 }
+.form {
+  flex-shrink: 0;
+  min-height: 100%;
+}
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
   padding: 0 15px;
   padding-bottom: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: calc(100vh - 470px);
 }
 </style>

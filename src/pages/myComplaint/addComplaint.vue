@@ -1,5 +1,5 @@
 <template>
-  <div class="new-Complaint">
+  <div class="new-complaint">
     <van-form class="form" label-width="7.2em" @submit="onSubmit">
       <van-field
         v-model="state.username"
@@ -37,7 +37,7 @@
         rows="1"
         autosize
       />
-      <van-field name="uploader" label="附件">
+      <van-field name="uploader" label="附件" style="margin-bottom: 10px">
         <template #input>
           <van-uploader v-model="state.remark" />
         </template>
@@ -107,26 +107,25 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-.form {
-  background-color: #ffffff;
-}
-</style>
 <style lang="scss" scoped>
-.new-repair {
+.form {
+  flex-shrink: 0;
+  min-height: 100%;
+}
+.new-complaint {
   min-height: 100%;
   padding-top: 20px;
   background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
 }
 .footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
   padding: 0 15px;
   padding-bottom: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: calc(100vh - 400px);
 }
 </style>
