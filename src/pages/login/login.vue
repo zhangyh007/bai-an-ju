@@ -2,7 +2,7 @@
   <div class="login">
     <div class="content">
       <header class="header">商户认证</header>
-      <van-form class="form" @submit="onSubmit">
+      <van-form ref="form" class="form">
         <van-field
           v-model="state.username"
           name="username"
@@ -21,26 +21,27 @@
           maxlength="11"
           :rules="[{ required: true, message: '请输入手机号码' }]"
         />
-        <footer class="footer">
-          <van-button
-            type="primary"
-            size="large"
-            color="#fe9505"
-            style="height: 40px"
-            native-type="submit"
-          >
-            确定
-          </van-button>
-        </footer>
       </van-form>
     </div>
+    <footer class="footer">
+      <van-button
+        type="primary"
+        size="large"
+        color="#fe9505"
+        style="height: 40px"
+        native-type="submit"
+        @click="onSubmit"
+      >
+        确定
+      </van-button>
+    </footer>
   </div>
 </template>
 
 <script>
 import { Button, Form, Field } from 'vant'
 import { useRouter } from 'vue-router'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 export default {
   name: 'Login',
   components: {
@@ -54,19 +55,25 @@ export default {
       username: '',
       phone: ''
     })
+    const form = ref(null)
     const goLogin = () => {
       router.push('/login')
     }
-    const onSubmit = (val) => {
-      console.log(val)
-      window.localStorage.username = val.username
-      window.localStorage.phone = val.phone
-      router.push('/my')
+    const onSubmit = () => {
+      form.value.validate().then(() => {
+        window.localStorage.username = state.username
+        window.localStorage.phone = state.phone
+        router.push('/my')
+      }).catch(err => {
+        console.log(err)
+      })
+
     }
     return {
       state,
       goLogin,
-      onSubmit
+      onSubmit,
+      form
     }
   }
 }
@@ -78,6 +85,7 @@ export default {
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 .header {
   font-size: 36px;
@@ -90,13 +98,13 @@ export default {
 .content {
   padding: 0 10%;
   flex-shrink: 0;
-  min-height: 100%;
+  margin-bottom: 20px;
 }
 
 .footer {
   width: 100%;
   padding: 0 10%;
   padding-bottom: 20px;
-  padding-top: calc(100vh - 400px);
+  flex-shrink: 0;
 }
 </style>

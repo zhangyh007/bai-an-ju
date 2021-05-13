@@ -1,6 +1,6 @@
 <template>
   <div class="new-complaint">
-    <van-form class="form" label-width="7.2em" @submit="onSubmit">
+    <van-form ref="form" class="form" label-width="7.2em">
       <van-field
         v-model="state.username"
         name="username"
@@ -42,34 +42,35 @@
           <van-uploader v-model="state.remark" />
         </template>
       </van-field>
-      <footer class="footer">
-        <van-button
-          type="primary"
-          size="normal"
-          color="#fe9505"
-          style="width: 120px"
-          native-type="submit"
-        >
-          提交
-        </van-button>
-        <van-button
-          type="primary"
-          size="normal"
-          color="#cccccc"
-          style="width: 120px"
-          @click="goBack"
-        >
-          取消
-        </van-button>
-      </footer>
     </van-form>
+    <footer class="footer">
+      <van-button
+        type="primary"
+        size="normal"
+        color="#fe9505"
+        style="width: 120px"
+        native-type="submit"
+        @click="onSubmit"
+      >
+        提交
+      </van-button>
+      <van-button
+        type="primary"
+        size="normal"
+        color="#cccccc"
+        style="width: 120px"
+        @click="goBack"
+      >
+        取消
+      </van-button>
+      </footer>
   </div>
 </template>
 
 <script>
 import { Button, Form, Field, Uploader } from 'vant'
 import { useRouter } from 'vue-router'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import dayjs from 'dayjs'
 export default {
   name: 'NewRepair',
@@ -92,15 +93,20 @@ export default {
       repairContent: '水管破裂',
 
     })
-    const onSubmit = (val) => {
-      console.log(val)
-      router.push('/my')
+    const form = ref(null)
+    const onSubmit = () => {
+      form.value.validate().then(() => {
+        router.push('/my')
+      }).catch(err => {
+        console.log(err)
+      })
     }
     const goBack = () => {
       router.go(-1)
     }
     return {
       state,
+      form,
       onSubmit,
       goBack
     }
@@ -110,7 +116,7 @@ export default {
 <style lang="scss" scoped>
 .form {
   flex-shrink: 0;
-  min-height: 100%;
+  margin-bottom: 20px;
 }
 .new-complaint {
   min-height: 100%;
@@ -118,6 +124,7 @@ export default {
   background-color: #f0f0f0;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 .footer {
   width: 100%;
@@ -126,6 +133,5 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: calc(100vh - 400px);
 }
 </style>

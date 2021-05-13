@@ -149,3 +149,12 @@ li {
   background-color: #0068b7 !important;
   border: 1px solid #0068b7 !important;
 } */
+
+.flex-shrink-no {
+  flex-shrink: 0;
+}
+.footer {
+  padding: 0 10%;
+  padding-bottom: 20px;
+  flex-shrink: 0;
+}
